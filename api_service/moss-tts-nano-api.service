@@ -1,0 +1,38 @@
+[Unit]
+Description=MOSS-TTS-Nano API Service
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=brookli
+Group=brookli
+WorkingDirectory=/home/brookli/MOSS-TTS-Nano
+
+# 激活 conda 环境并启动服务
+Environment="PATH=/home/brookli/anaconda3/envs/moss-tts-nano/bin:/home/brookli/anaconda3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="CONDA_DEFAULT_ENV=moss-tts-nano"
+Environment="CONDA_PREFIX=/home/brookli/anaconda3/envs/moss-tts-nano"
+
+ExecStart=/home/brookli/anaconda3/envs/moss-tts-nano/bin/python /home/brookli/MOSS-TTS-Nano/api_service/moss_tts_api.py
+
+# 自动重启配置
+Restart=always
+RestartSec=5
+StartLimitInterval=0
+
+# 日志配置
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=moss-tts-nano-api
+
+# 资源限制
+LimitNOFILE=65536
+
+# 安全配置
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/home/brookli/MOSS-TTS-Nano
+
+[Install]
+WantedBy=multi-user.target

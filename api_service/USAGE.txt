@@ -1,0 +1,21 @@
+MOSS-TTS-Nano API 快速使用指南
+================================
+
+1. 安装依赖
+   pip install pydub requests
+   sudo apt install ffmpeg
+
+2. 启动服务
+   ./api_service/start_api.sh
+
+3. 测试
+   python api_service/test_api.py
+
+4. 调用示例
+   curl -X POST "http://localhost:8005/tts?text=你好&voice=zh_1" -o test.mp3
+
+5. 系统服务部署
+   sudo ./api_service/install_service.sh
+
+详细文档: api_service/README.md
+Java 示例: api_service/examples/MossTtsClient.java
